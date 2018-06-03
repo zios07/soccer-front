@@ -1,7 +1,7 @@
 ùbody,
 html {
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
 }
 
 body {
@@ -247,7 +247,26 @@ header.masthead p {
   border-top: 1px solid #ffe6e0;
 }
 
-
 .card {
   margin: 4% 0;
+}
+
+.container {
+  margin-top: 5%;
+}
+
+.td-join {
+  width: 22%;
+}
+
+.table-todaymatches {
+  margin-top: 7%;
+}
+
+.badges-container {
+  margin-left: 30px;
+}
+
+.badges-container > div {
+  margin-left: 4px; 
 }
