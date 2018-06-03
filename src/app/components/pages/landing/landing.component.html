@@ -1,25 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-  <div class="container">
-    <a class="navbar-brand js-scroll-trigger" href="#about">SOCCER SERVICE</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#services">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<app-landing-nav></app-landing-nav>
 
 <header id="about" class="masthead text-center text-white d-flex">
   <div class="container my-auto">
@@ -31,8 +11,8 @@
         <hr>
       </div>
       <div class="col-lg-8 mx-auto">
-        <button class="btn btn-radius btn-primary btn-xl js-scroll-trigger btn-sign-up" (click)="open(signupTemplate)">Sign up</button>
-        <button class="btn btn-radius btn-primary btn-xl js-scroll-trigger btn-login" (click)="open(loginTemplate)">Login</button>
+        <button class="btn btn-radius btn-primary btn-xl js-scroll-trigger btn-sign-up" (click)="open(signupTemplate, 'signup')">Sign up</button>
+        <button class="btn btn-radius btn-primary btn-xl js-scroll-trigger btn-login" (click)="open(loginTemplate, 'login')">Login</button>
       </div>
     </div>
   </div>
@@ -113,31 +93,19 @@
   <div class="modal-body">
     <form>
       <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputEmail4">Email</label>
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">@</div>
-            </div>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-          </div>
-        </div>
-
-        <div class="form-group col-md-6">
-          <label for="inlineFormInputGroup">Username</label>
+        <div class="form-group col-md-4">
+          <label for="inputUsername">Username</label>
           <div class="input-group mb-2">
             <div class="input-group-prepend">
               <div class="input-group-text">
                 <i class="fa fa-user"></i>
               </div>
             </div>
-            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+            <input type="text" required class="form-control" name="username" id="inputUsername" placeholder="Username" [(ngModel)]="player.username">
           </div>
         </div>
-      </div>
-      <div class="form-row">
         
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="inputPassword4">Password</label>
           <div class="input-group mb-2">
             <div class="input-group-prepend">
@@ -145,10 +113,10 @@
                 <i class="fa fa-lock"></i>
               </div>
             </div>
-            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+            <input type="password" required class="form-control" name="password" id="inputPassword4" placeholder="Password" [(ngModel)]="player.password">
           </div>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="inputConfirmPassword4">Confirm Password</label>
           <div class="input-group mb-2">
             <div class="input-group-prepend">
@@ -156,56 +124,74 @@
                 <i class="fa fa-lock"></i>
               </div>
             </div>
-            <input type="password" class="form-control" id="inputConfirmPassword4" placeholder="Confirmation">
+            <input type="password" required class="form-control" name="confirmPwd" id="inputConfirmPassword4" placeholder="Confirmation" [(ngModel)]="confirmPwd">
           </div>
         </div>
+      </div>
 
-      </div>
-      <div class="form-group">
-        <label for="inputAddress">Address</label><div class="input-group mb-2">
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <i class="fa fa-address-card"></i>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputEmail4">Email</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">@</div>
             </div>
+            <input type="email" required class="form-control" name="email" id="inputEmail4" placeholder="Email" [(ngModel)]="player.email">
           </div>
-          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
         </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputAddress2">Address 2</label>
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <i class="fa fa-address-card"></i>
+        <div class="form-group col-md-4">
+          <label for="inputFirstName">First Name</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-user"></i>
+              </div>
             </div>
+            <input type="text" required class="form-control" name="firstName" id="inputFirstName" placeholder="First Name" [(ngModel)]="player.firstName">
           </div>
-          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>  
+        <div class="form-group col-md-4">
+          <label for="inputLastName">Last Name</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-user"></i>
+              </div>
+            </div>
+            <input type="text" required class="form-control" name="lastName" id="inputLastName" placeholder="Last Name" [(ngModel)]="player.lastName">
+          </div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputCity">City</label>
-          <input type="text" class="form-control" id="inputCity">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="inputState">State</label>
-          <select id="inputState" class="form-control">
-            <option selected>Choose...</option>
-            <option>...</option>
+          <select id="inputCity" class="form-control" name="city" [(ngModel)]="player.address.city" required
+          (ngModelChange)="onCityChange($event)">
+            <option *ngFor="let city of cities" [value]="city.id">{{city.label}}</option>
           </select>
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-6">
           <label for="inputZip">Zip</label>
-          <input type="text" class="form-control" id="inputZip">
+          <input type="text" required class="form-control" name="zip" id="inputZip" [(ngModel)]="player.address.zip">
         </div>
       </div>
-    </form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputPosition">Preferred Position</label>
+          <select id="inputPosition" class="form-control" name="preferredPosition" required [(ngModel)]="player.preferredPosition">
+            <option *ngFor="let pos of positions" [value]="pos"> {{pos}} </option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="photo">Photo</label>
+          <input type="file" name="photo" name="photo" id="photo" [(ngModel)]="player.photo">
+        </div>
+      </div>
+    </form>  
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-    <button type="button" class="btn btn-primary" (click)="signin()">Sign in</button>
+    <button type="button" class="btn btn-primary" (click)="signup()">Sign in</button>
   </div>
 </ng-template>
 
@@ -224,7 +210,7 @@
                 <i class="fa fa-user"></i>
               </div>
             </div>
-            <input type="email" class="form-control" id="inputLogin" placeholder="Login">
+            <input type="text" class="form-control" required id="inputLogin" placeholder="Login" name="username" [(ngModel)]="user.username">
           </div>
         </div>
       </div>
@@ -237,7 +223,7 @@
                 <i class="fa fa-lock"></i>
               </div>
             </div>
-            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+            <input type="password" class="form-control" required id="inputPassword4" placeholder="Password" name="password" [(ngModel)]="user.password">
           </div>
         </div>
       </div>
