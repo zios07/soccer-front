@@ -51,8 +51,19 @@
                 <strong>Address : </strong>
                 {{todayMatches[i].address.city.label}} - {{todayMatches[i].address.zip}}
               </p>
-              <button class="btn btn-outline-primary btn-join">Join {{todayMatches[i].host.code}}</button>&nbsp;
-              <button class="btn btn-outline-primary btn-join">Join {{todayMatches[i].guest.code}}</button>
+              <div class="join-btns-container" *ngIf="!hasTimeConstraint(todayMatches[i]) && !hasAlreadyJoined(todayMatches[i])">
+                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(todayMatches[i], todayMatches[i].host)">Join {{todayMatches[i].host.code}}</button>&nbsp;
+                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(todayMatches[i], todayMatches[i].guest)">Join {{todayMatches[i].guest.code}}</button>
+              </div>
+              <!-- <span class="alert alert-info" *ngIf="!hasTimeConstraint(todayMatches[i+1]) && hasAlreadyJoined(todayMatches[i+1])">
+                  You have joined this match.
+              </span>
+              <span class="alert alert-info" *ngIf="hasTimeConstraint(todayMatches[i]) && !hasAlreadyJoined(todayMatches[i])">
+                You have another match scheduled at {{todayMatches[i].date | date}}.
+              </span> -->
+              <span class="alert alert-info" *ngIf="todayMatches[i].hasAlreadyJoined">
+                  You have another match scheduled at {{todayMatches[i].date | date}}.
+              </span>
             </div>
 
             <div class="col-sm-6" *ngIf="even && todayMatches[i+1]">
@@ -71,8 +82,20 @@
                 <strong>Address : </strong>
                 {{todayMatches[i+1].address.city.label}} - {{todayMatches[i+1].address.zip}}
               </p>
-              <button class="btn btn-outline-primary btn-join">Join {{todayMatches[i+1].host.code}}</button>&nbsp;
-              <button class="btn btn-outline-primary btn-join">Join {{todayMatches[i+1].guest.code}}</button>
+              <div class="join-btns-container" *ngIf="!hasTimeConstraint(todayMatches[i+1]) && !hasAlreadyJoined(todayMatches[i+1])">
+                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(todayMatches[i+1], todayMatches[i+1].host)">Join {{todayMatches[i+1].host.code}}</button>&nbsp;
+                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(todayMatches[i+1], todayMatches[i+1].guest)">Join {{todayMatches[i+1].guest.code}}</button>
+              </div>
+              <!-- <span class="alert alert-info" *ngIf="!hasTimeConstraint(todayMatches[i+1]) && hasAlreadyJoined(todayMatches[i+1])">
+                  You have joined this match.
+              </span>
+              <span class="alert alert-info" *ngIf="hasTimeConstraint(todayMatches[i]) && !hasAlreadyJoined(todayMatches[i])">
+                You have another match scheduled at {{todayMatches[i].date | date}}.
+              </span> -->
+              <span class="alert alert-info" *ngIf="todayMatches[i+1].hasAlreadyJoined">
+                  You have another match scheduled at {{todayMatches[i].date | date}}.
+              </span>
+
             </div>
 
           </div>

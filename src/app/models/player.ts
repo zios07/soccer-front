@@ -1,6 +1,7 @@
 import { Team } from "./team";
 import { Statistic } from "./statistic";
 import { Address } from "./address";
+import { Participation } from "./participation";
 
 export class Player {
     
@@ -23,4 +24,6 @@ export class Player {
     statistic: Statistic;
 
     password: string;
+
+    participations: Array<Participation>;
 }
