@@ -55,7 +55,7 @@
               <button class="btn btn-outline-primary btn-join">Join {{todayMatches[i].guest.code}}</button>
             </div>
 
-            <div class="col-sm-6" *ngIf="even">
+            <div class="col-sm-6" *ngIf="even && todayMatches[i+1]">
               <h5 class="card-title">{{todayMatches[i+1].label}} : {{todayMatches[i+1].host.name}} VS {{todayMatches[i+1].guest.name}} 
                 <div class="badges-container">
                   <div class="badge badge-primary"><i class="fa fa-user"></i> Remaining: {{ calculateRemainingPlayers(todayMatches[i+1]) }}</div>
