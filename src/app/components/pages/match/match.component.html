@@ -2,7 +2,7 @@
 <div class="container">
   
 
-<div class="row">
+  <div class="row">
     <div class="col-sm-6">
       <div class="card text-center">
         <div class="card-body">
@@ -31,8 +31,53 @@
   <div class="card text-center">
       <div class="card-body">
         <h3 class="card-title">Today's matches</h3>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="card text-center">
+
+          <div class="card-body row" *ngFor="let index of todayMatches; let i = index; let even = even">
+            
+            <div class="col-sm-6" *ngIf="even">
+              <h5 class="card-title">{{todayMatches[i].label}} : {{todayMatches[i].host.name}} VS {{todayMatches[i].guest.name}} 
+                <div class="badges-container">
+                  <div class="badge badge-primary"><i class="fa fa-user"></i> Remaining: {{ calculateRemainingPlayers(todayMatches[i]) }}</div>
+                  <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div>
+                  <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div>
+                </div>
+              </h5>
+              <p class="card-text">
+                <strong>Pitch : </strong>
+                {{todayMatches[i].pitch.name}} <br>
+                <strong>Size : </strong>
+                {{todayMatches[i].pitch.size}} <br>
+                <strong>Address : </strong>
+                {{todayMatches[i].address.city.label}} - {{todayMatches[i].address.zip}}
+              </p>
+              <button class="btn btn-outline-primary btn-join">Join {{todayMatches[i].host.code}}</button>&nbsp;
+              <button class="btn btn-outline-primary btn-join">Join {{todayMatches[i].guest.code}}</button>
+            </div>
+
+            <div class="col-sm-6" *ngIf="even">
+              <h5 class="card-title">{{todayMatches[i+1].label}} : {{todayMatches[i+1].host.name}} VS {{todayMatches[i+1].guest.name}} 
+                <div class="badges-container">
+                  <div class="badge badge-primary"><i class="fa fa-user"></i> Remaining: {{ calculateRemainingPlayers(todayMatches[i+1]) }}</div>
+                  <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div>
+                  <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div>
+                </div>
+              </h5>
+              <p class="card-text">
+                <strong>Pitch : </strong>
+                {{todayMatches[i+1].pitch.name}} <br>
+                <strong>Size : </strong>
+                {{todayMatches[i+1].pitch.size}} <br>
+                <strong>Address : </strong>
+                {{todayMatches[i+1].address.city.label}} - {{todayMatches[i+1].address.zip}}
+              </p>
+              <button class="btn btn-outline-primary btn-join">Join {{todayMatches[i+1].host.code}}</button>&nbsp;
+              <button class="btn btn-outline-primary btn-join">Join {{todayMatches[i+1].guest.code}}</button>
+            </div>
+
+          </div>
+
+        </div>
     </div>
   </div>
 </div>

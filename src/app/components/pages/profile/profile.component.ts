@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
       this.player.address = new Address();
     this.cityService.getAll().subscribe(resp => {
       this.cities = resp;
-      
     })
 
   }

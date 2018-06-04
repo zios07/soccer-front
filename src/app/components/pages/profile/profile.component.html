@@ -57,9 +57,9 @@
                     <!--/row-->
                 </div>
                 <div class="tab-pane" id="stats">
-                    <div class="alert alert-info alert-dismissable">
+                    <!-- <div class="alert alert-info alert-dismissable">
                         <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                    </div>
+                    </div> -->
                     <h6>Player Stats</h6>
                     <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div><br>
                     <div class="badge badge-success"><i class="fa fa-cog"></i> 9 Assists</div><br>
@@ -100,12 +100,6 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Address</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="Street">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Address</label>
                             <div class="col-lg-6">
                                 <label for="inputCity">City</label>
                                 <select id="inputCity" class="form-control" placeholder="city" name="city" [(ngModel)]="player.address.city" required
@@ -114,7 +108,8 @@
                                 </select>
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="text" value="" placeholder="State">
+                                <label for="inputZip">City</label>
+                                <input class="form-control" id="inputZip" type="text" value="" placeholder="zip">
                             </div>
                         </div>
                         <div class="form-group row">

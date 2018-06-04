@@ -15,6 +15,7 @@ export class NavComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.homeLink = localStorage.getItem('connectedPlayer') ? '/match' : '';
   }
 
   logout() {
