@@ -43,34 +43,25 @@ export class MatchFormComponent implements OnInit {
   }
 
   create() {
-    console.log(Object.keys(this.match));
-    Object.keys(this.match).forEach(element => {
-      console.log(this.match[element]);
-      if(!this.match[element] || this.match[element ] === null) {
-      console.log(element);
-        console.log(this.match[element]);
-        this.error = true;
-        this.errorMessage = "Please fill all the inputs";
-        return;
-      }
-    });
-    // this.matchService.create(this.match).subscribe(resp => {
-    //   this.router.navigate(['/match']);
-    //   this.toastr.info("Match added successfully");
-    // }, error => {
-    //   this.toastr.error(String(error));
-    // })
+    this.matchService.create(this.match).subscribe(resp => {
+      this.toastr.info("Match added successfully");
+      this.router.navigate(['/match']);
+    }, error => {
+      this.toastr.error(String(error));
+    })
   }
 
   onCityChange(id) {
-    this.match.address.city = this.cities.find(city => {
-      return city.id === id
+    this.cities.forEach(city => {
+      if(city.id == id)
+        this.match.address.city =  city;
     });
   }
 
   onPitchChange(id) {
-    this.match.pitch = this.pitches.find(pitch => {
-      return pitch.id === id
+    this.pitches.forEach(pitch => {
+      if(pitch.id == id)
+        this.match.pitch =  pitch;
     });
   }
 
