@@ -68,5 +68,4 @@ export class MatchComponent implements OnInit {
     });
     return matches;
   }
-
 }
