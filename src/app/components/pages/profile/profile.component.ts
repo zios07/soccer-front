@@ -40,4 +40,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  onCityChange(id) {
+    this.player.address.city = this.cities.find(city => {
+      return city.id === id
+    });
+  }
+
 }

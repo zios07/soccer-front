@@ -2,21 +2,24 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-6 mx-auto">
-      <div class="card border-secondary">
-        <div class="card-header">
-          <h3 class="mb-0 my-2">Create new match</h3>
-        </div>
-        <div class="card-body">
-          <form class="needs-validation form" novalidate role="form" autocomplete="off" >
-            <div class="form-row">
+    <div class="col-md-12 mx-auto">
+      <form action="">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="mb-0 my-2">Create new match</h3>
+          </div>
+          <br>
+          <span class="alert alert-danger" *ngIf="error">
+            {{errorMessage}}
+          </span>
+  
+          <div class="card-body row">
+            <div class="col-sm-6">
               <div class="form-group">
+                <h3>Match information</h3>
                 <label for="inputDate">Date</label>
                 <input type="date" name="date" class="form-control" id="inputDate" [(ngModel)]="match.date" required>
               </div>
-            </div>
-
-            <div class="form-row">
               <div class="form-group">
                 <label for="inputCity">City</label>
                 <select id="inputCity" class="form-control" name="city" [(ngModel)]="match.address.city" required
@@ -24,9 +27,6 @@
                   <option *ngFor="let city of cities" [value]="city.id">{{city.label}}</option>
                 </select>
               </div>
-            </div>
-
-            <div class="form-row">
               <div class="form-group">
                 <label for="validationCustom02">Zip</label>
                 <input type="text" class="form-control" id="validationCustom02" placeholder="Zip" name="zip" [(ngModel)]="match.address.zip" required>
@@ -34,9 +34,6 @@
                   Looks good!
                 </div>
               </div>
-            </div>
-            
-            <div class="form-row">
               <div class="form-group">
                 <label for="inputPitch">Pitch</label>
                 <select id="inputPitch" class="form-control" name="pitch" [(ngModel)]="match.pitch" required
@@ -45,31 +42,21 @@
                 </select>
               </div>
             </div>
-            <button class="btn btn-primary" (click)="create()">Add Match</button>
-          </form>
-
+            <div class="col-sm-6">
+              <h3>Teams information</h3>
+              <div class="form-group">
+                <label for="inputDate">Hosting Team</label>
+                <input type="text" placeholder="Team name" name="hostingTeam" class="form-control" id="inputHost" [(ngModel)]="match.host.name">
+              </div>
+              <div class="form-group">
+                <label for="inputGuest">Guest Team</label>
+                <input type="text" placeholder="Team name" name="guestTeam" class="form-control" id="inputGuest" [(ngModel)]="match.guest.name">
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Add Match</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
-  <script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-  (function() {
-    'use strict';
-    window.addEventListener('load', function() {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
-  </script>
 </div>
