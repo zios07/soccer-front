@@ -1,0 +1,139 @@
+
+<app-nav></app-nav>
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#stats" data-toggle="tab" class="nav-link">Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3">Player Profile</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Full Name</h6>
+                            <p>
+                                {{player.firstName}} {{player.lastName}}
+                            </p>
+                            <h6>Team</h6>
+                            <p>
+                                {{player.team?.name}}
+                            </p>
+                            <h6>Preferred Position</h6>
+                            <p>
+                                {{player.preferredPosition}}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Recent badges</h6>
+                            <a href="#" class="badge badge-dark badge-pill">man of the match</a>
+                            <a href="#" class="badge badge-dark badge-pill">player of the week</a>
+                            <a href="#" class="badge badge-dark badge-pill">best goal</a>
+                            <a href="#" class="badge badge-dark badge-pill">best striker</a>
+                            <hr>
+                            
+                        </div>
+                        <div class="col-md-12">
+                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Recent PLayed Matches</h5>
+                            <table class="table table-sm table-hover table-striped">
+                                <tbody>                                    
+                                    <!-- <tr *ngFor="let match of recentPlayedMatches">
+                                        <td>
+                                            <strong>{{match.host.name}}</strong> {{match.hostGoals}} - {{match.guestGoals}} <strong>{{match.guest.name}}</strong>
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+                <div class="tab-pane" id="stats">
+                    <!-- <div class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                    </div> -->
+                    <h6>Player Stats</h6>
+                    <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div><br>
+                    <div class="badge badge-success"><i class="fa fa-cog"></i> 9 Assists</div><br>
+                    <div class="badge badge-danger"><i class="fa fa-eye"></i> 54 Matches</div><br>
+                    <br><br>
+                    <h6>Player Review</h6>
+                    <div class="fiv-stars">
+                        Five Stars
+                    </div>
+                </div>
+                <div class="tab-pane" id="edit">
+                    <form role="form">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                            <div class="col-lg-9">
+                                <input type="text" required class="form-control" name="firstName" id="inputfirstName" placeholder="First Name" [(ngModel)]="player.firstName">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Last name</label>
+                            <div class="col-lg-9">
+                                <input type="text" required class="form-control" name="lastName" id="inputlastName" placeholder="Last Name" [(ngModel)]="player.lastName">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                            <div class="col-lg-9">
+                                <input type="email" required class="form-control" name="email" id="inputemail" placeholder="Email" [(ngModel)]="player.email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Preferred Position</label>
+                            <div class="col-lg-9">
+                                <select id="inputPosition" class="form-control" name="preferredPosition" required [(ngModel)]="player.preferredPosition">
+                                    <option *ngFor="let pos of positions" [value]="pos"> {{pos}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Address</label>
+                            <div class="col-lg-6">
+                                <label for="inputCity">City</label>
+                                <select id="inputCity" class="form-control" placeholder="city" name="city" [(ngModel)]="player.address.city" required
+                                    (ngModelChange)="onCityChange($event)">
+                                    <option *ngFor="let city of cities" [value]="city.id">{{city.label}}</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label for="inputZip">City</label>
+                                <input class="form-control" id="inputZip" type="text" value="" placeholder="zip">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" name="username" id="inputusername" placeholder="Username" [(ngModel)]="player.username">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                            <input type="reset" class="btn btn-default" value="Cancel">
+                            <input type="button" class="btn btn-primary" value="Save Changes">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="../../../../assets/images/profile.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <h6 class="mt-2">Upload a different photo</h6>
+            <label class="custom-file">
+                <input type="file" id="file" class="custom-file-input">
+                <span class="custom-file-control">Choose a Photo</span>
+            </label>
+        </div>
+    </div>
+</div>

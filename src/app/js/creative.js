@@ -28,7 +28,7 @@
   
     // Collapse Navbar
     var navbarCollapse = function() {
-      if ($("#mainNav").offset() && $("#mainNav").offset().top > 100) {
+      if ($("#mainNav").offset() && $("#mainNav").offset().top > 10) {
         $("#mainNav").addClass("navbar-shrink");
       } else {
         $("#mainNav").removeClass("navbar-shrink");
