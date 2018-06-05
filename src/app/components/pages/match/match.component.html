@@ -38,9 +38,9 @@
             <div class="col-sm-6" *ngIf="even">
               <h5 class="card-title">{{todayMatches[i].label}} : {{todayMatches[i].host.name}} VS {{todayMatches[i].guest.name}} 
                 <div class="badges-container">
-                  <div class="badge badge-primary"><i class="fa fa-user"></i> Remaining: {{ calculateRemainingPlayers(todayMatches[i]) }}</div>
-                  <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div>
-                  <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div>
+                  <!-- <div class="badge badge-secondary"><i class="fa fa-user"></i> Remaining: {{ calculateRemainingPlayers(todayMatches[i]) }}</div> -->
+                  <!-- <div class="badge badge-secondary"><i class="fa fa-user"></i> 20 Goals</div> -->
+                  <div class="badge badge-secondary"><i class="fa fa-user"></i> {{todayMatches[i].pitch.size}} Players</div>
                 </div>
               </h5>
               <p class="card-text">
@@ -55,23 +55,20 @@
                 <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(todayMatches[i], todayMatches[i].host)">Join {{todayMatches[i].host.code}}</button>&nbsp;
                 <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(todayMatches[i], todayMatches[i].guest)">Join {{todayMatches[i].guest.code}}</button>
               </div>
-              <!-- <span class="alert alert-info" *ngIf="!hasTimeConstraint(todayMatches[i+1]) && hasAlreadyJoined(todayMatches[i+1])">
-                  You have joined this match.
-              </span>
-              <span class="alert alert-info" *ngIf="hasTimeConstraint(todayMatches[i]) && !hasAlreadyJoined(todayMatches[i])">
-                You have another match scheduled at {{todayMatches[i].date | date}}.
-              </span> -->
-              <span class="alert alert-info" *ngIf="todayMatches[i].hasAlreadyJoined">
+              <span class="alert alert-info" *ngIf="todayMatches[i].hasTimeConstraint && !todayMatches[i].hasAlreadyJoined">
                   You have another match scheduled at {{todayMatches[i].date | date}}.
+              </span>
+              <span class="alert alert-info" *ngIf="todayMatches[i].hasAlreadyJoined && !todayMatches[i].hasTimeConstraint">
+                  You have joined this match.
               </span>
             </div>
 
             <div class="col-sm-6" *ngIf="even && todayMatches[i+1]">
               <h5 class="card-title">{{todayMatches[i+1].label}} : {{todayMatches[i+1].host.name}} VS {{todayMatches[i+1].guest.name}} 
                 <div class="badges-container">
-                  <div class="badge badge-primary"><i class="fa fa-user"></i> Remaining: {{ calculateRemainingPlayers(todayMatches[i+1]) }}</div>
-                  <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div>
-                  <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div>
+                  <!-- <div class="badge badge-secondary"><i class="fa fa-user"></i> Remaining: {{ calculateRemainingPlayers(todayMatches[i+1]) }}</div> -->
+                  <!-- <div class="badge badge-secondary"><i class="fa fa-user"></i> 20 Goals</div> -->
+                  <div class="badge badge-secondary"><i class="fa fa-user"></i> {{todayMatches[i+1].pitch.size}} Players</div>
                 </div>
               </h5>
               <p class="card-text">
@@ -86,20 +83,14 @@
                 <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(todayMatches[i+1], todayMatches[i+1].host)">Join {{todayMatches[i+1].host.code}}</button>&nbsp;
                 <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(todayMatches[i+1], todayMatches[i+1].guest)">Join {{todayMatches[i+1].guest.code}}</button>
               </div>
-              <!-- <span class="alert alert-info" *ngIf="!hasTimeConstraint(todayMatches[i+1]) && hasAlreadyJoined(todayMatches[i+1])">
+              <span class="alert alert-info" *ngIf="todayMatches[i+1].hasTimeConstraint && !todayMatches[i+1].hasAlreadyJoined">
+                  You have another match scheduled at {{todayMatches[i+1].date | date}}.
+              </span>
+              <span class="alert alert-info" *ngIf="todayMatches[i+1].hasAlreadyJoined && !todayMatches[i+1].hasTimeConstraint">
                   You have joined this match.
               </span>
-              <span class="alert alert-info" *ngIf="hasTimeConstraint(todayMatches[i]) && !hasAlreadyJoined(todayMatches[i])">
-                You have another match scheduled at {{todayMatches[i].date | date}}.
-              </span> -->
-              <span class="alert alert-info" *ngIf="todayMatches[i+1].hasAlreadyJoined">
-                  You have another match scheduled at {{todayMatches[i].date | date}}.
-              </span>
-
             </div>
-
           </div>
-
         </div>
     </div>
   </div>

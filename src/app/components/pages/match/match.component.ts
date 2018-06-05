@@ -31,14 +31,11 @@ export class MatchComponent implements OnInit {
     })
   }
 
-  calculateRemainingPlayers(match) {
-    return 9;
-  }
-
   JoinMatch(match, team) {
     this.player = this.authService.getAuthenticatedPlayer();
     this.playerService.joinTeam(this.player, match, team).subscribe(resp => {
       localStorage.setItem('connectedPlayer', JSON.stringify(resp.body));
+      this.todayMatches = this.verifyConstraints(this.todayMatches);
       this.toastr.info(`Successfully joined ${team.name}`);
     }, error => {
       this.toastr.error("Error occured while joining the team");
@@ -51,13 +48,11 @@ export class MatchComponent implements OnInit {
 
   hasAlreadyJoined(match) {
     let joined: boolean = false;
-    this.player.participations.forEach(participation => {
-      console.log(participation);
-      console.log(match);
-      if(participation.match.id == match.id)
-        joined = true;
-    })
-    console.log(joined);
+    if(this.player.participations)
+      this.player.participations.forEach(participation => {
+        if(participation.match.id == match.id)
+          joined = true;
+      })
     return joined;
   }
 

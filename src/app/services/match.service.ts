@@ -24,4 +24,8 @@ export class MatchService {
     return this.entityService.get(this.url + "today");
   }
 
+  getPlayerMatches(id: number) {
+    return this.entityService.get(this.url + "player/" + id);
+  }
+
 }
