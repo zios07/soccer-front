@@ -9,6 +9,7 @@ import { MatchService } from '../../../services/match.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Team } from '../../../models/team';
+import { PlayerService } from '../../../services/player.service';
 
 @Component({
   selector: 'app-match-form',
@@ -26,6 +27,7 @@ export class MatchFormComponent implements OnInit {
   constructor(private cityService: CityService,
               private pitchService: PitchService,
               private matchService: MatchService,
+              private playerService: PlayerService,
               private router: Router,
               private toastr: ToastrService) { 
     this.match.address = new Address();
@@ -43,9 +45,16 @@ export class MatchFormComponent implements OnInit {
   }
 
   create() {
-    this.matchService.create(this.match).subscribe(resp => {
+    console.log(this.match);
+    this.matchService.create(this.match).toPromise().then(resp => {
       this.toastr.info("Match added successfully");
-      this.router.navigate(['/match']);
+      console.log(resp);
+      let match = resp.body;
+      let player = localStorage.getItem('connectedPlayer');
+      this.playerService.joinTeam(JSON.parse(player), match, match.host).toPromise().then(resp => {
+        localStorage.setItem('connectedPlayer', JSON.stringify(resp.body));
+        this.router.navigate(['/match']);
+      });
     }, error => {
       this.toastr.error(String(error));
     })

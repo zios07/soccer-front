@@ -2,16 +2,19 @@
 <app-nav></app-nav>
 <div class="container">
     <div class="row my-2">
-        <div class="col-lg-8 order-lg-2">
+        <div class="col-md-12">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="" data-target="#stats" data-toggle="tab" class="nav-link">Stats</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#matches" data-toggle="tab" class="nav-link">Joined Matches</a>
                 </li>
             </ul>
             <div class="tab-content py-4">
@@ -56,10 +59,7 @@
                     </div>
                     <!--/row-->
                 </div>
-                <div class="tab-pane" id="stats">
-                    <!-- <div class="alert alert-info alert-dismissable">
-                        <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                    </div> -->
+                <!-- <div class="tab-pane" id="stats">
                     <h6>Player Stats</h6>
                     <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div><br>
                     <div class="badge badge-success"><i class="fa fa-cog"></i> 9 Assists</div><br>
@@ -69,7 +69,7 @@
                     <div class="fiv-stars">
                         Five Stars
                     </div>
-                </div>
+                </div> -->
                 <div class="tab-pane" id="edit">
                     <form role="form">
                         <div class="form-group row">
@@ -93,7 +93,8 @@
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Preferred Position</label>
                             <div class="col-lg-9">
-                                <select id="inputPosition" class="form-control" name="preferredPosition" required [(ngModel)]="player.preferredPosition">
+                                <select id="inputPosition" class="form-control" name="preferredPosition" required [(ngModel)]="selectedPosition"
+                                (ngModelChange)="onPositionChange($event)">
                                     <option *ngFor="let pos of positions" [value]="pos"> {{pos}} </option>
                                 </select>
                             </div>
@@ -102,14 +103,14 @@
                             <label class="col-lg-3 col-form-label form-control-label">Address</label>
                             <div class="col-lg-6">
                                 <label for="inputCity">City</label>
-                                <select id="inputCity" class="form-control" placeholder="city" name="city" [(ngModel)]="player.address.city" required
+                                <select id="inputCity" class="form-control" placeholder="city" name="city" [(ngModel)]="selectedCity" required
                                     (ngModelChange)="onCityChange($event)">
                                     <option *ngFor="let city of cities" [value]="city.id">{{city.label}}</option>
                                 </select>
                             </div>
                             <div class="col-lg-3">
-                                <label for="inputZip">City</label>
-                                <input class="form-control" id="inputZip" type="text" value="" placeholder="zip">
+                                <label for="inputZip">Zip</label>
+                                <input class="form-control" id="inputZip" name="zip" type="text" [(ngModel)]="player.address.zip" placeholder="zip">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -120,20 +121,30 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
-                            <input type="reset" class="btn btn-default" value="Cancel">
-                            <input type="button" class="btn btn-primary" value="Save Changes">
+                            <input type="button" class="btn btn-outline-primary" value="Save Changes" (click)="updateProfile()">
                         </div>
                     </form>
                 </div>
+                <div class="tab-pane" id="matches">
+                    <div class="card text-center" *ngFor="let match of joinedMatches">
+                        <h5 class="card-header">{{match.label}}</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">{{match.date | date}}</h5>
+                            <p class="card-text">{{match.host.name}} - {{match.guest.name}}</p>
+                            <button class="btn btn-outline-primary" (click)="quitMatch(match)">Quit</button>
+                        </div>
+                    </div>
+                    <br>
+                </div>
             </div>
         </div>
-        <div class="col-lg-4 order-lg-1 text-center">
+        <!-- <div class="col-lg-4 order-lg-1 text-center">
             <img src="../../../../assets/images/profile.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar">
             <h6 class="mt-2">Upload a different photo</h6>
             <label class="custom-file">
                 <input type="file" id="file" class="custom-file-input">
                 <span class="custom-file-control">Choose a Photo</span>
             </label>
-        </div>
+        </div> -->
     </div>
 </div>

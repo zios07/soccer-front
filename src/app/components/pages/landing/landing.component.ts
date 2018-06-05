@@ -39,7 +39,7 @@ export class LandingComponent implements OnInit {
     this.authService.register(this.player).subscribe(resp => {
       localStorage.setItem('connectedPlayer', JSON.stringify(resp));
       this.dialog.close();
-      this.router.navigate(['profile']);
+      this.router.navigate(['match']);
       this.toastr.info("Registration success");
     })
   }
@@ -49,7 +49,6 @@ export class LandingComponent implements OnInit {
       localStorage.setItem('connectedPlayer', JSON.stringify(resp));
       this.dialog.close();
       this.router.navigate(['match']);
-      // this.toastr.success("Logged in successfully");
     }, error => {
       this.toastr.error(String(error));
     })
@@ -65,8 +64,9 @@ export class LandingComponent implements OnInit {
   }
   
   onCityChange(id) {
-    this.player.address.city = this.cities.find(city => {
-      return city.id === id
+    this.cities.forEach(city => {
+      if(city.id == id)
+        this.player.address.city = city;
     });
   }
 

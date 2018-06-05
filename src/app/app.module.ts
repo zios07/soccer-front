@@ -38,7 +38,9 @@ import { MatchFormComponent } from './components/pages/match-form/match-form.com
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      preventDuplicates: true
+    }),
     RouterModule.forRoot(routes),
     NgbModule.forRoot(),
     HttpClientModule,

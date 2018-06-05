@@ -25,12 +25,16 @@ export class PlayerService {
   }
 
   joinTeam(player: Player, match: Match, team: Team) {
-    let participation = new Participation(team, match);
+    let participation = new Participation(team, match, player.id);
     if(player.participations && player.participations.length >= 1)
       player.participations.push(participation);
     else
       player.participations = new Array<Participation>(participation);
     return this.entityService.put(this.url, player);
+  }
+
+  quiteMatch(match: Match, player: Player) {
+    return this.entityService.delete(this.url + player.id + "/match/" + match.id);
   }
 
 }
