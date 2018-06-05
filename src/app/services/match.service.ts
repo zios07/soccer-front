@@ -8,7 +8,7 @@ import { Match } from '../models/match';
 })
 export class MatchService {
 
-  url: string = environment.API_URL + "matches/";
+  url: string = environment.API_URL + "matches";
 
   constructor(private entityService: EntityService) { }
 
@@ -21,11 +21,15 @@ export class MatchService {
   }
 
   getTodayMatches() {
-    return this.entityService.get(this.url + "today");
+    return this.entityService.get(this.url + "/today");
+  }
+
+  getMatches(page: number, size: number) {
+    return this.entityService.get(this.url + "?page=" + page + "&size=" + size);
   }
 
   getPlayerMatches(id: number) {
-    return this.entityService.get(this.url + "player/" + id);
+    return this.entityService.get(this.url + "/player/" + id);
   }
 
 }
