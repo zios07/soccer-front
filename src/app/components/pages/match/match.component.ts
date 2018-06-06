@@ -14,8 +14,11 @@ import { Player } from '../../../models/player';
 })
 export class MatchComponent implements OnInit {
 
-  todayMatches: Match[] = [];
+  matches: Match[] = [];
   player:Player;
+  page: number = 1;
+  size: number = 5;
+  totalPages: number;
 
   constructor(private matchService: MatchService,
               private authService: AuthenticationService,
@@ -25,9 +28,18 @@ export class MatchComponent implements OnInit {
 
   ngOnInit() {
     this.player = this.authService.getAuthenticatedPlayer();
-    this.matchService.getTodayMatches().subscribe(matches => {
-      this.todayMatches = matches;
-      this.todayMatches = this.verifyConstraints(this.todayMatches);
+    this.loadMatches();
+  }
+
+  onPageChange() {
+    this.loadMatches();
+  }
+
+  loadMatches() {
+    this.matchService.getMatches(this.page - 1, this.size).subscribe(resp => {
+      this.totalPages= resp.totalPages * 10;
+      this.matches = resp.content;
+      this.matches = this.verifyConstraints(this.matches);
     })
   }
 
@@ -35,7 +47,7 @@ export class MatchComponent implements OnInit {
     this.player = this.authService.getAuthenticatedPlayer();
     this.playerService.joinTeam(this.player, match, team).subscribe(resp => {
       localStorage.setItem('connectedPlayer', JSON.stringify(resp.body));
-      this.todayMatches = this.verifyConstraints(this.todayMatches);
+      this.matches = this.verifyConstraints(this.matches);
       this.toastr.info(`Successfully joined ${team.name}`);
     }, error => {
       this.toastr.error("Error occured while joining the team");
