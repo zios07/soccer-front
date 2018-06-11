@@ -1,6 +1,7 @@
 import { MapsAPILoader } from '@agm/core';
 import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone, Component, OnInit } from '@angular/core';
+import { LocationService } from '../../../services/location.service';
 
 @Component({
   selector: 'app-match-search',
@@ -9,15 +10,22 @@ import { ViewChild, ElementRef, NgZone, Component, OnInit } from '@angular/core'
 })
 export class MatchSearchComponent implements OnInit {
 
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number;
+  lng: number;
   mapTypeControl:boolean = true;
 
   @ViewChild('search') public searchElement: ElementRef;
 
-  constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) {}
+  constructor(private mapsAPILoader: MapsAPILoader, 
+              private ngZone: NgZone,
+              private locationService: LocationService) {}
 
   ngOnInit() {
+    this.initMap();
+    this.setMarker();
+  }
+
+  initMap() {
     this.mapsAPILoader.load().then(
       () => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElement.nativeElement, { types:["address"] });
@@ -30,6 +38,22 @@ export class MatchSearchComponent implements OnInit {
         });
       });
     });
+  }
+
+  setMarker() {
+    let location = this.locationService.getPlayerLocation();
+    console.log(location);
+    if(location) {
+      this.lat = location.latitude;
+      this.lng = location.longiture;
+    }
+  }
+
+  changeLocation() {
+    if(this.searchElement.nativeElement.value) {
+      let geoCode = this.locationService.geoCodeAddress(this.searchElement.nativeElement.value);
+      this.setMarker();
+    }
   }
 
 }
