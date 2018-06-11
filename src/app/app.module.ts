@@ -22,6 +22,9 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { MatchComponent } from './components/pages/match/match.component';
 import { MatchSearchComponent } from './components/pages/match-search/match-search.component';
 import { MatchFormComponent } from './components/pages/match-form/match-form.component';
+import { AgmCoreModule } from '@agm/core';
+import { CookieService } from 'ngx-cookie-service';
+import { LocationService } from './services/location.service';
 
 @NgModule({
   declarations: [
@@ -46,11 +49,17 @@ import { MatchFormComponent } from './components/pages/match-form/match-form.com
     HttpClientModule,
     HttpModule,
     FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBakSo59mk9sAR6DDVx2NxHNTywywCmIBc',
+      libraries: ["places"]
+    })
   ],
   providers: [
     AuthenticationService,
     EntityService,
-    CityService
+    CityService,
+    LocationService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
