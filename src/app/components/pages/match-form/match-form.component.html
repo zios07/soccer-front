@@ -39,14 +39,9 @@
                 <div class="form-group">
                   <label for="validationCustom02">Players count</label>
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary active">
-                      <input type="radio" name="playerscount" id="option1" (change)="selectPlayersCount(10)" checked> 10 Players
-                    </label>
-                    <label class="btn btn-secondary">
-                      <input type="radio" name="playerscount" id="option2" (change)="selectPlayersCount(14)"> 14 Players
-                    </label>
-                    <label class="btn btn-secondary">
-                      <input type="radio" name="playerscount" id="option3" (change)="selectPlayersCount(22)"> 22 Players
+                    <label [class]="idx === 0 ? 'btn btn-secondary active' : 'btn btn-secondary'" (click)="onPlayersCountChange(entry.value)" *ngFor="let entry of playersCountOptions; let idx = index">
+                      <input type="radio" name="playerscount"
+                      [checked]="idx === 0"> {{entry.value}} Players
                     </label>
                   </div>
                 </div>
@@ -56,7 +51,6 @@
           </div>
         </div>
         <button class="btn btn-primary" (click)="create()">Add Match</button>
-        <!-- <button class="btn btn-primary">Add Match</button> -->
       </div>
     </div>
   </div>

@@ -59,17 +59,7 @@
                     </div>
                     <!--/row-->
                 </div>
-                <!-- <div class="tab-pane" id="stats">
-                    <h6>Player Stats</h6>
-                    <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div><br>
-                    <div class="badge badge-success"><i class="fa fa-cog"></i> 9 Assists</div><br>
-                    <div class="badge badge-danger"><i class="fa fa-eye"></i> 54 Matches</div><br>
-                    <br><br>
-                    <h6>Player Review</h6>
-                    <div class="fiv-stars">
-                        Five Stars
-                    </div>
-                </div> -->
+                
                 <div class="tab-pane" id="edit">
                     <form role="form">
                         <div class="form-group row">
@@ -127,7 +117,7 @@
                         <h5 class="card-header">{{match.label}}</h5>
                         <div class="card-body">
                             <h5 class="card-title">{{match.date | date}}</h5>
-                            <p class="card-text">{{match.host.name}} - {{match.guest.name}}</p>
+                            <p class="card-text">{{match.address.city}} - {{match.address.zip}}</p>
                             <button class="btn btn-outline-primary" (click)="quitMatch(match)">Quit</button>
                         </div>
                     </div>

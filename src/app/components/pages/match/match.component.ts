@@ -6,6 +6,7 @@ import { Match } from '../../../models/match';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { PlayerService } from '../../../services/player.service';
 import { Player } from '../../../models/player';
+import { ParticipationService } from '../../../services/participation.service';
 
 @Component({
   selector: 'app-match',
@@ -21,6 +22,7 @@ export class MatchComponent implements OnInit {
   totalPages: number;
 
   constructor(private matchService: MatchService,
+              private participationService: ParticipationService,
               private authService: AuthenticationService,
               private playerService: PlayerService,
               private router: Router,
@@ -39,19 +41,17 @@ export class MatchComponent implements OnInit {
     this.matchService.getMatches(this.page - 1, this.size).subscribe(resp => {
       this.totalPages= resp.totalPages * 10;
       this.matches = resp.content;
-      this.matches = this.verifyConstraints(this.matches);
+      this.verifyConstraints(this.matches);
     })
   }
 
-  JoinMatch(match, team) {
-    this.player = this.authService.getAuthenticatedPlayer();
-    this.playerService.joinTeam(this.player, match, team).subscribe(resp => {
-      localStorage.setItem('connectedPlayer', JSON.stringify(resp.body));
-      this.matches = this.verifyConstraints(this.matches);
-      this.toastr.info(`Successfully joined ${team.name}`);
+  JoinMatch(match) {
+    this.participationService.participate(match, this.player).subscribe(resp => {
+      this.toastr.info("Joined match successfully");
+      this.verifyConstraints(match);
     }, error => {
-      this.toastr.error("Error occured while joining the team");
-    })
+      this.toastr.error("Error while joining the match");
+    });
   }
 
   hasTimeConstraint(match) {
@@ -68,11 +68,36 @@ export class MatchComponent implements OnInit {
     return joined;
   }
 
+  // TODO: use player participation attribut
+
   verifyConstraints(matches) {
-    matches.forEach(match => {
-      match.hasTimeConstraint = this.hasTimeConstraint(match);
-      match.hasAlreadyJoined = this.hasAlreadyJoined(match);
+
+    this.participationService.getPlayerParticipations(this.player.id).subscribe(participations => {
+      if(Array.isArray(matches) && participations) {
+        participations.forEach(participation => {
+            matches.forEach(match => {
+              if(participation.match.id === match.id) {
+                match.hasTimeConstraint = this.hasTimeConstraint(match);
+                match.hasAlreadyJoined = true;
+              }
+            });
+            this.matches = matches;
+          
+        });
+      } else {
+        let match = matches;
+        participations.forEach(participation => {
+          if(participation.match.id === matches.id) {
+            match.hasTimeConstraint = this.hasTimeConstraint(match);
+            match.hasAlreadyJoined = true;
+          }
+        });
+      }
     });
-    return matches;
+
+    
+
+    
+    
   }
 }

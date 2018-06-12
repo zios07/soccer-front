@@ -7,6 +7,7 @@ import { CityService } from '../../../services/city.service';
 import { Address } from '../../../models/address';
 import { Match } from '../../../models/match';
 import { MatchService } from '../../../services/match.service';
+import { ParticipationService } from '../../../services/participation.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,6 +23,7 @@ export class ProfileComponent implements OnInit {
   selectedPosition: string;
 
   constructor(private authService: AuthenticationService,
+              private participationService: ParticipationService,
               private playerService: PlayerService,
               private matchService: MatchService,
               private toastr: ToastrService,
@@ -64,8 +66,8 @@ export class ProfileComponent implements OnInit {
   }
 
   quitMatch(match) {
-    this.playerService.quiteMatch(match, this.player).toPromise().then(resp => {
-      localStorage.setItem('connectedPlayer', JSON.stringify(resp.body));
+    this.participationService.quiteMatch(match, this.player).toPromise().then(resp => {
+      // localStorage.setItem('connectedPlayer', JSON.stringify(resp.body));
       this.toastr.info('You are no longer member of this match');
       this.loadJoinedMatches();
     }, error => {

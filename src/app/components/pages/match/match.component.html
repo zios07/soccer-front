@@ -33,24 +33,19 @@
         <h3 class="card-title match-card-title">Today's matches</h3>
         <div class="card text-center">
 
-          <div class="card-body row" *ngFor="let match of matches">
+          <div class="card-body" *ngFor="let match of matches">
             
-              <h5 class="card-title">{{match.label}} : {{match.host.name}} VS {{match.guest.name}} 
-                <div class="badges-container">
-                  <div class="badge badge-secondary"><i class="fa fa-user"></i> {{match.pitch.size}} Players</div>
-                </div>
+              <h5 class="card-title">{{match.label}}
+                <span class="badges-container">
+                  <span class="badge badge-secondary"><i class="fa fa-user"></i> Size: {{match.playersCount}} Players</span>
+                </span>
               </h5>
               <p class="card-text">
-                <strong>Pitch : </strong>
-                {{match.pitch.name}} <br>
-                <strong>Size : </strong>
-                {{match.pitch.size}} <br>
                 <strong>Address : </strong>
-                {{match.address.city.label}} - {{match.address.zip}}
+                {{match.address.city}} - {{match.address.zip}}
               </p>
-              <div class="join-btns-container" *ngIf="!hasTimeConstraint(match) && !hasAlreadyJoined(match)">
-                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(match, match.host)">Join {{match.host.code}}</button>&nbsp;
-                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(match, match.guest)">Join {{match.guest.code}}</button>
+              <div class="join-btns-container" *ngIf="!match.hasTimeConstraint&& !match.hasAlreadyJoined">
+                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(match)">Join this match</button>&nbsp;
               </div>
               <span class="alert alert-info" *ngIf="match.hasTimeConstraint && !match.hasAlreadyJoined">
                   You have another match scheduled at {{match.date | date}}.
@@ -59,8 +54,8 @@
                   You have joined this match.
               </span>
 
+              <hr>
           </div>
-
           <ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalPages" ellipses="true" [(page)]="page" (pageChange)="onPageChange()"></ngb-pagination>            
 
         </div>

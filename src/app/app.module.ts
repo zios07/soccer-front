@@ -25,6 +25,7 @@ import { MatchFormComponent } from './components/pages/match-form/match-form.com
 import { AgmCoreModule } from '@agm/core';
 import { CookieService } from 'ngx-cookie-service';
 import { LocationService } from './services/location.service';
+import { ParticipationService } from './services/participation.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { LocationService } from './services/location.service';
     EntityService,
     CityService,
     LocationService,
-    CookieService
+    CookieService,
+    ParticipationService
   ],
   bootstrap: [AppComponent]
 })

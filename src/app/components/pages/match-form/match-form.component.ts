@@ -21,6 +21,7 @@ export class MatchFormComponent implements OnInit {
   pitches: Pitch[] = [];
   errorMessage: string;
   error: boolean = false;
+  playersCountOptions = [{'value': 10}, {'value': 14}, {'value': 22}];
 
   constructor(private cityService: CityService,
               private pitchService: PitchService,
@@ -29,6 +30,7 @@ export class MatchFormComponent implements OnInit {
               private router: Router,
               private toastr: ToastrService) { 
     this.match.address = new Address();
+    this.match.playersCount = 10;
   }
 
   ngOnInit() {
@@ -37,25 +39,18 @@ export class MatchFormComponent implements OnInit {
     })
   }
 
-  selectPlayersCount(count) {
-    console.log("value changed");
+  onPlayersCountChange(count) {
     this.match.playersCount = count;
   }
 
   create() {
-    console.log(this.match);
-    // this.matchService.create(this.match).toPromise().then(resp => {
-    //   this.toastr.info("Match added successfully");
-    //   console.log(resp);
-    //   let match = resp.body;
-    //   let player = localStorage.getItem('connectedPlayer');
-    //   this.playerService.joinTeam(JSON.parse(player), match, match.host).toPromise().then(resp => {
-    //     localStorage.setItem('connectedPlayer', JSON.stringify(resp.body));
-    //     this.router.navigate(['/match']);
-    //   });
-    // }, error => {
-    //   this.toastr.error(String(error));
-    // })
+    this.matchService.create(this.match).toPromise().then(resp => {
+      this.toastr.info("Match added successfully");
+      let match = resp.body;
+        this.router.navigate(['/match']);
+    }, error => {
+      this.toastr.error(String(error));
+    })
   }
 
   onPitchChange(id) {
