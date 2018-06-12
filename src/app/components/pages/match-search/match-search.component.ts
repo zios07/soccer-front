@@ -2,6 +2,7 @@ import { MapsAPILoader } from '@agm/core';
 import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone, Component, OnInit } from '@angular/core';
 import { LocationService } from '../../../services/location.service';
+import { Match } from '../../../models/match';
 
 @Component({
   selector: 'app-match-search',
@@ -13,6 +14,7 @@ export class MatchSearchComponent implements OnInit {
   lat: number;
   lng: number;
   mapTypeControl:boolean = true;
+  matches: Match[] = [];
 
   @ViewChild('search') public searchElement: ElementRef;
 
@@ -42,7 +44,6 @@ export class MatchSearchComponent implements OnInit {
 
   setMarker() {
     let location = this.locationService.getPlayerLocation();
-    console.log(location);
     if(location) {
       this.lat = location.latitude;
       this.lng = location.longiture;

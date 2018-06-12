@@ -103,10 +103,7 @@
                             <label class="col-lg-3 col-form-label form-control-label">Address</label>
                             <div class="col-lg-6">
                                 <label for="inputCity">City</label>
-                                <select id="inputCity" class="form-control" placeholder="city" name="city" [(ngModel)]="selectedCity" required
-                                    (ngModelChange)="onCityChange($event)">
-                                    <option *ngFor="let city of cities" [value]="city.id">{{city.label}}</option>
-                                </select>
+                                <input class="form-control" id="inputCity" name="city" type="text" [(ngModel)]="player.address.city" placeholder="city">
                             </div>
                             <div class="col-lg-3">
                                 <label for="inputZip">Zip</label>
@@ -138,13 +135,5 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="col-lg-4 order-lg-1 text-center">
-            <img src="../../../../assets/images/profile.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-            <h6 class="mt-2">Upload a different photo</h6>
-            <label class="custom-file">
-                <input type="file" id="file" class="custom-file-input">
-                <span class="custom-file-control">Choose a Photo</span>
-            </label>
-        </div> -->
     </div>
 </div>

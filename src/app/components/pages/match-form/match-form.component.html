@@ -23,16 +23,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="inputCity">City</label>
-                  <select id="inputCity" class="form-control" name="city" [(ngModel)]="match.address.city" required
-                  (ngModelChange)="onCityChange($event)">
-                    <option *ngFor="let city of cities" [value]="city.id">{{city.label}}</option>
-                  </select>
+                  <input type="text" class="form-control" id="inputCity" placeholder="City" name="city" [(ngModel)]="match.address.city" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="validationCustom02">Zip</label>
-                  <input type="text" class="form-control" id="validationCustom02" placeholder="Zip" name="zip" [(ngModel)]="match.address.zip" required>
+                  <label for="inputZip">Zip</label>
+                  <input type="text" class="form-control" id="inputZip" placeholder="Zip" name="zip" [(ngModel)]="match.address.zip" required>
                   <div class="valid-feedback">
                     Looks good!
                   </div>
@@ -40,16 +37,16 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="validationCustom02">Players per team</label>
+                  <label for="validationCustom02">Players count</label>
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-secondary active">
-                      <input type="radio" name="options" id="option1" autocomplete="off" [(ngModel)]="match.size" checked> 5 Players
+                      <input type="radio" name="playerscount" id="option1" (change)="selectPlayersCount(10)" checked> 10 Players
                     </label>
                     <label class="btn btn-secondary">
-                      <input type="radio" name="options" id="option2" autocomplete="off" [(ngModel)]="match.size" > 7 Players
+                      <input type="radio" name="playerscount" id="option2" (change)="selectPlayersCount(14)"> 14 Players
                     </label>
                     <label class="btn btn-secondary">
-                      <input type="radio" name="options" id="option3" autocomplete="off" [(ngModel)]="match.size" > 11 Players
+                      <input type="radio" name="playerscount" id="option3" (change)="selectPlayersCount(22)"> 22 Players
                     </label>
                   </div>
                 </div>
@@ -58,8 +55,8 @@
             
           </div>
         </div>
-        <!-- <button class="btn btn-primary" (click)="create()">Add Match</button> -->
-        <button class="btn btn-primary">Add Match</button>
+        <button class="btn btn-primary" (click)="create()">Add Match</button>
+        <!-- <button class="btn btn-primary">Add Match</button> -->
       </div>
     </div>
   </div>

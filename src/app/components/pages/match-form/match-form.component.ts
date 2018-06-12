@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Match } from '../../../models/match';
-import { City } from '../../../models/city';
 import { Pitch } from '../../../models/pitch';
 import { CityService } from '../../../services/city.service';
 import { Address } from '../../../models/address';
@@ -19,7 +18,6 @@ import { PlayerService } from '../../../services/player.service';
 export class MatchFormComponent implements OnInit {
 
   match: Match = new Match();
-  cities: City[] = [];
   pitches: Pitch[] = [];
   errorMessage: string;
   error: boolean = false;
@@ -31,40 +29,33 @@ export class MatchFormComponent implements OnInit {
               private router: Router,
               private toastr: ToastrService) { 
     this.match.address = new Address();
-    this.match.host = new Team();
-    this.match.guest = new Team();
   }
 
   ngOnInit() {
-    this.cityService.getAll().subscribe(resp => {
-      this.cities = resp;
-    })
     this.pitchService.getAll().subscribe(resp => {
       this.pitches = resp;
     })
   }
 
-  create() {
-    console.log(this.match);
-    this.matchService.create(this.match).toPromise().then(resp => {
-      this.toastr.info("Match added successfully");
-      console.log(resp);
-      let match = resp.body;
-      let player = localStorage.getItem('connectedPlayer');
-      this.playerService.joinTeam(JSON.parse(player), match, match.host).toPromise().then(resp => {
-        localStorage.setItem('connectedPlayer', JSON.stringify(resp.body));
-        this.router.navigate(['/match']);
-      });
-    }, error => {
-      this.toastr.error(String(error));
-    })
+  selectPlayersCount(count) {
+    console.log("value changed");
+    this.match.playersCount = count;
   }
 
-  onCityChange(id) {
-    this.cities.forEach(city => {
-      if(city.id == id)
-        this.match.address.city =  city;
-    });
+  create() {
+    console.log(this.match);
+    // this.matchService.create(this.match).toPromise().then(resp => {
+    //   this.toastr.info("Match added successfully");
+    //   console.log(resp);
+    //   let match = resp.body;
+    //   let player = localStorage.getItem('connectedPlayer');
+    //   this.playerService.joinTeam(JSON.parse(player), match, match.host).toPromise().then(resp => {
+    //     localStorage.setItem('connectedPlayer', JSON.stringify(resp.body));
+    //     this.router.navigate(['/match']);
+    //   });
+    // }, error => {
+    //   this.toastr.error(String(error));
+    // })
   }
 
   onPitchChange(id) {

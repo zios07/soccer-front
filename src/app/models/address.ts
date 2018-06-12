@@ -2,6 +2,6 @@ import { City } from "./city";
 
 export class Address {
     id: number;
-    city: City;
+    city: string;
     zip: number;
 }
