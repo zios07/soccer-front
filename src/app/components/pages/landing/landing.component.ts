@@ -4,7 +4,6 @@ import { Player } from '../../../models/player';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Address } from '../../../models/address';
 import { CityService } from '../../../services/city.service';
-import { City } from '../../../models/city';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { UserDto } from '../../../dto/userDto';
@@ -20,7 +19,6 @@ export class LandingComponent implements OnInit {
   player: Player = new Player();
   positions: any[] = ["Goal Keeper" ,"Defender", "Attacker"];
   confirmPwd: String;
-  cities: City[] = [];
   user: UserDto = new UserDto();
 
   constructor(private modalService: NgbModal,
@@ -55,19 +53,8 @@ export class LandingComponent implements OnInit {
   }
 
   open(content, type) {
-    if(type === 'signup')
-      this.cityService.getAll().subscribe(resp => {
-        this.cities = resp;
-      })
     let size:"sm" | "lg" = type === 'signup' ? 'lg': 'sm';
     this.dialog = this.modalService.open(content, {backdropClass: 'light-blue-backdrop', centered: true, size: size});
-  }
-  
-  onCityChange(id) {
-    this.cities.forEach(city => {
-      if(city.id == id)
-        this.player.address.city = city;
-    });
   }
 
 }

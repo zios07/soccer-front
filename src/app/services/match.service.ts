@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { EntityService } from './entity.service';
 import { Match } from '../models/match';
+import { Player } from '../models/player';
 
 @Injectable({
   providedIn: 'root'

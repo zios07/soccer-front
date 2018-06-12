@@ -59,17 +59,7 @@
                     </div>
                     <!--/row-->
                 </div>
-                <!-- <div class="tab-pane" id="stats">
-                    <h6>Player Stats</h6>
-                    <div class="badge badge-primary"><i class="fa fa-user"></i> 20 Goals</div><br>
-                    <div class="badge badge-success"><i class="fa fa-cog"></i> 9 Assists</div><br>
-                    <div class="badge badge-danger"><i class="fa fa-eye"></i> 54 Matches</div><br>
-                    <br><br>
-                    <h6>Player Review</h6>
-                    <div class="fiv-stars">
-                        Five Stars
-                    </div>
-                </div> -->
+                
                 <div class="tab-pane" id="edit">
                     <form role="form">
                         <div class="form-group row">
@@ -103,10 +93,7 @@
                             <label class="col-lg-3 col-form-label form-control-label">Address</label>
                             <div class="col-lg-6">
                                 <label for="inputCity">City</label>
-                                <select id="inputCity" class="form-control" placeholder="city" name="city" [(ngModel)]="selectedCity" required
-                                    (ngModelChange)="onCityChange($event)">
-                                    <option *ngFor="let city of cities" [value]="city.id">{{city.label}}</option>
-                                </select>
+                                <input class="form-control" id="inputCity" name="city" type="text" [(ngModel)]="player.address.city" placeholder="city">
                             </div>
                             <div class="col-lg-3">
                                 <label for="inputZip">Zip</label>
@@ -126,25 +113,25 @@
                     </form>
                 </div>
                 <div class="tab-pane" id="matches">
-                    <div class="card text-center" *ngFor="let match of joinedMatches">
-                        <h5 class="card-header">{{match.label}}</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">{{match.date | date}}</h5>
-                            <p class="card-text">{{match.host.name}} - {{match.guest.name}}</p>
-                            <button class="btn btn-outline-primary" (click)="quitMatch(match)">Quit</button>
+                    <div *ngIf="joinedMatches.length !== 0">
+                        <div class="card text-center" *ngFor="let match of joinedMatches">
+                            <h5 class="card-header">{{match.label}}</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">{{match.date | date}}</h5>
+                                <p class="card-text">{{match.address.city}} - {{match.address.zip}}</p>
+                                <button class="btn btn-outline-primary" (click)="quitMatch(match)">Quit</button>
+                            </div>
                         </div>
+                    </div>
+                    <div class="card text-center" *ngIf="joinedMatches.length === 0">
+                        <h5 class="card-header">
+                            <div>You are not a member of any match !</div><br>
+                            <button class="btn btn-outline-primary" routerLink="/match">Select match to join</button>
+                        </h5>
                     </div>
                     <br>
                 </div>
             </div>
         </div>
-        <!-- <div class="col-lg-4 order-lg-1 text-center">
-            <img src="../../../../assets/images/profile.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-            <h6 class="mt-2">Upload a different photo</h6>
-            <label class="custom-file">
-                <input type="file" id="file" class="custom-file-input">
-                <span class="custom-file-control">Choose a Photo</span>
-            </label>
-        </div> -->
     </div>
 </div>

@@ -6,6 +6,18 @@
     <div class="col-sm-6">
       <div class="card text-center">
         <div class="card-body">
+          <h5 class="card-title">Change your location</h5>
+          <p class="card-text">Change your location and load all matches scheduled in that location.</p>
+          <a routerLink="search" class="btn btn-primary">
+              <i class="fa fa-globe"></i>&nbsp;
+              Change location
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card text-center">
+        <div class="card-body">
           <h5 class="card-title">Create a Match</h5>
           <p class="card-text">Create a match, reserve the pitch and wait for players to join you.</p>
           <a routerLink="add" class="btn btn-primary">
@@ -15,52 +27,44 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Join Existing matches</h5>
-          <p class="card-text">Look for matches near to you, join one of them and have fun.</p>
-          <a routerLink="search" class="btn btn-primary">
-              <i class="fa fa-search"></i>&nbsp;
-              Search for a Match
-            </a>
-        </div>
-      </div>
-    </div>
   </div>
   <div class="card text-center">
       <div class="card-body">
-        <h3 class="card-title match-card-title">Today's matches</h3>
+        <h3 class="card-title match-card-title">Matches List</h3>
         <div class="card text-center">
 
-          <div class="card-body row" *ngFor="let match of matches">
+          <div class="card-body" *ngFor="let match of matches">
             
-              <h5 class="card-title">{{match.label}} : {{match.host.name}} VS {{match.guest.name}} 
-                <div class="badges-container">
-                  <div class="badge badge-secondary"><i class="fa fa-user"></i> {{match.pitch.size}} Players</div>
-                </div>
+              <h5 class="card-title">{{match.label}} -
+                <span class="badges-container">
+                    <span class="badge badge-secondary"><i class="fa fa-user"></i> Size: {{match.playersCount}} Players</span> |
+                    <span class="badge badge-danger"><i class="fa fa-user"></i> Available: {{match.availablePlaces}} Players</span>
+                  </span>
               </h5>
-              <p class="card-text">
-                <strong>Pitch : </strong>
-                {{match.pitch.name}} <br>
-                <strong>Size : </strong>
-                {{match.pitch.size}} <br>
-                <strong>Address : </strong>
-                {{match.address.city.label}} - {{match.address.zip}}
-              </p>
-              <div class="join-btns-container" *ngIf="!hasTimeConstraint(match) && !hasAlreadyJoined(match)">
-                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(match, match.host)">Join {{match.host.code}}</button>&nbsp;
-                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(match, match.guest)">Join {{match.guest.code}}</button>
+              <div class="card-text">
+                <div>
+                  <strong>Date : </strong>
+                  {{match.date | date: 'dd-MM-yyyy HH:mm'}}
+                </div>
+                <div>
+                  <strong>Address : </strong>
+                  {{match.address.city}} - {{match.address.zip}}
+                </div>
+              </div><br>
+              <div class="join-btns-container" *ngIf="!match.hasTimeConstraint && !match.hasAlreadyJoined && match.availablePlaces !== 0">
+                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(match)">Join this match</button>&nbsp;
               </div>
-              <span class="alert alert-info" *ngIf="match.hasTimeConstraint && !match.hasAlreadyJoined">
+              <span class="alert alert-info" *ngIf="match.hasTimeConstraint && !match.hasAlreadyJoined && match.availablePlaces !== match.playersCount">
                   You have another match scheduled at {{match.date | date}}.
               </span>
               <span class="alert alert-info" *ngIf="match.hasAlreadyJoined && !match.hasTimeConstraint">
                   You have joined this match.
               </span>
-
+              <span class="alert alert-danger" *ngIf="match.availablePlaces === 0 && !match.hasAlreadyJoined">
+                  This match is full.
+              </span>
+              <hr>
           </div>
-
           <ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalPages" ellipses="true" [(page)]="page" (pageChange)="onPageChange()"></ngb-pagination>            
 
         </div>

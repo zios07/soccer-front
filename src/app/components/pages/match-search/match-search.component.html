@@ -1,6 +1,20 @@
 <app-nav></app-nav>
-<div class="container">
-    <p>
-      match-search works!
-    </p>
+
+<div class="map-container">
+    <div class="container">
+        <h3>Choose location where you want to play</h3>
+      <div class="form-group">
+        <input type="text" placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control address-input" #search>
+      </div>
+    </div>
+
+  <agm-map [latitude]="lat" [longitude]="lng" [mapTypeControl]="mapTypeControl" (mapClick)="changeLocation($event)">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+  <br>
+  <button class="btn btn-outline-primary" (click)="changeLocation()">Change location</button>
+
 </div>
+
+
+
