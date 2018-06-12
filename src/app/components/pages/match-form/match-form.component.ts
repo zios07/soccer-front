@@ -22,7 +22,8 @@ export class MatchFormComponent implements OnInit {
   errorMessage: string;
   error: boolean = false;
   playersCountOptions = [{'value': 10}, {'value': 14}, {'value': 22}];
-
+  reservedPlaces: number = 0;
+  
   constructor(private cityService: CityService,
               private pitchService: PitchService,
               private matchService: MatchService,
@@ -44,6 +45,7 @@ export class MatchFormComponent implements OnInit {
   }
 
   create() {
+    this.match.availablePlaces = this.match.playersCount - this.reservedPlaces;
     this.matchService.create(this.match).toPromise().then(resp => {
       this.toastr.info("Match added successfully");
       let match = resp.body;

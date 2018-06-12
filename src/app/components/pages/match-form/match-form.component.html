@@ -13,7 +13,7 @@
         </span>
 
         <div class="card-body row">
-          <div class="col-sm-6 center-block">
+          <div class="col-sm-10 center-block">
             <div class="form-group">
               <h3>Match information</h3>
               <label for="inputDate">Date</label>
@@ -29,7 +29,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="inputZip">Zip</label>
-                  <input type="text" class="form-control" id="inputZip" placeholder="Zip" name="zip" [(ngModel)]="match.address.zip" required>
+                  <input type="number" min="0" class="form-control" id="inputZip" placeholder="Zip" name="zip" [(ngModel)]="match.address.zip" required>
                   <div class="valid-feedback">
                     Looks good!
                   </div>
@@ -38,13 +38,18 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="validationCustom02">Players count</label>
-                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <div class="btn-group btn-group-toggle radio-container" data-toggle="buttons">
                     <label [class]="idx === 0 ? 'btn btn-secondary active' : 'btn btn-secondary'" (click)="onPlayersCountChange(entry.value)" *ngFor="let entry of playersCountOptions; let idx = index">
-                      <input type="radio" name="playerscount"
+                      <input type="radio" name="playerscount" class="form-control"
                       [checked]="idx === 0"> {{entry.value}} Players
                     </label>
                   </div>
                 </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="validationCustom02">Reserve places</label>
+                  <input type="number" min="0" [max]="match.playersCount" class="form-control" id="inputReservedPlaces" placeholder="Reserve Places" name="reservedPlaces" [(ngModel)]="reservedPlaces" required>
               </div>
             </div>
             

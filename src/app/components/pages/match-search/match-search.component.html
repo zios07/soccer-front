@@ -8,7 +8,7 @@
       </div>
     </div>
 
-  <agm-map [latitude]="lat" [longitude]="lng" [mapTypeControl]="mapTypeControl">
+  <agm-map [latitude]="lat" [longitude]="lng" [mapTypeControl]="mapTypeControl" (mapClick)="changeLocation($event)">
     <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
   </agm-map>
   <br>

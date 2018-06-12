@@ -250,3 +250,7 @@ header.masthead p {
 .container {
   margin-top: 9%;
 }
+
+.radio-container {
+  display: block;
+}

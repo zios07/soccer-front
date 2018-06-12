@@ -3,6 +3,7 @@ import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone, Component, OnInit } from '@angular/core';
 import { LocationService } from '../../../services/location.service';
 import { Match } from '../../../models/match';
+import { Location } from '../../../models/location';
 
 @Component({
   selector: 'app-match-search',
@@ -50,10 +51,16 @@ export class MatchSearchComponent implements OnInit {
     }
   }
 
-  changeLocation() {
-    if(this.searchElement.nativeElement.value) {
-      let geoCode = this.locationService.geoCodeAddress(this.searchElement.nativeElement.value);
+  changeLocation(event) {
+    if(event) {
+      let location = new Location(event.coords.lng, event.coords.lat);
+      this.locationService.setPlayerLocation(location);
       this.setMarker();
+    } else {
+      if(this.searchElement.nativeElement.value) {
+        let geoCode = this.locationService.geoCodeAddress(this.searchElement.nativeElement.value);
+        this.setMarker();
+      }
     }
   }
 

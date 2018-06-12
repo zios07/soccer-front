@@ -113,13 +113,21 @@
                     </form>
                 </div>
                 <div class="tab-pane" id="matches">
-                    <div class="card text-center" *ngFor="let match of joinedMatches">
-                        <h5 class="card-header">{{match.label}}</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">{{match.date | date}}</h5>
-                            <p class="card-text">{{match.address.city}} - {{match.address.zip}}</p>
-                            <button class="btn btn-outline-primary" (click)="quitMatch(match)">Quit</button>
+                    <div *ngIf="joinedMatches.length !== 0">
+                        <div class="card text-center" *ngFor="let match of joinedMatches">
+                            <h5 class="card-header">{{match.label}}</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">{{match.date | date}}</h5>
+                                <p class="card-text">{{match.address.city}} - {{match.address.zip}}</p>
+                                <button class="btn btn-outline-primary" (click)="quitMatch(match)">Quit</button>
+                            </div>
                         </div>
+                    </div>
+                    <div class="card text-center" *ngIf="joinedMatches.length === 0">
+                        <h5 class="card-header">
+                            <div>You are not a member of any match !</div><br>
+                            <button class="btn btn-outline-primary" routerLink="/match">Select match to join</button>
+                        </h5>
                     </div>
                     <br>
                 </div>

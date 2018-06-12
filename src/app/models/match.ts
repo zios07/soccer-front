@@ -9,6 +9,7 @@ export class Match {
     address: Address;
     date: Date;
     playersCount: number;
+    availablePlaces: number;
     pitch: Pitch;
     winner: Team;
     hostGoals: number;

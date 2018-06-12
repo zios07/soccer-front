@@ -30,30 +30,39 @@
   </div>
   <div class="card text-center">
       <div class="card-body">
-        <h3 class="card-title match-card-title">Today's matches</h3>
+        <h3 class="card-title match-card-title">Matches List</h3>
         <div class="card text-center">
 
           <div class="card-body" *ngFor="let match of matches">
             
-              <h5 class="card-title">{{match.label}}
+              <h5 class="card-title">{{match.label}} -
                 <span class="badges-container">
-                  <span class="badge badge-secondary"><i class="fa fa-user"></i> Size: {{match.playersCount}} Players</span>
-                </span>
+                    <span class="badge badge-secondary"><i class="fa fa-user"></i> Size: {{match.playersCount}} Players</span> |
+                    <span class="badge badge-danger"><i class="fa fa-user"></i> Available: {{match.availablePlaces}} Players</span>
+                  </span>
               </h5>
-              <p class="card-text">
-                <strong>Address : </strong>
-                {{match.address.city}} - {{match.address.zip}}
-              </p>
-              <div class="join-btns-container" *ngIf="!match.hasTimeConstraint&& !match.hasAlreadyJoined">
+              <div class="card-text">
+                <div>
+                  <strong>Date : </strong>
+                  {{match.date | date: 'dd-MM-yyyy HH:mm'}}
+                </div>
+                <div>
+                  <strong>Address : </strong>
+                  {{match.address.city}} - {{match.address.zip}}
+                </div>
+              </div><br>
+              <div class="join-btns-container" *ngIf="!match.hasTimeConstraint && !match.hasAlreadyJoined && match.availablePlaces !== 0">
                 <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(match)">Join this match</button>&nbsp;
               </div>
-              <span class="alert alert-info" *ngIf="match.hasTimeConstraint && !match.hasAlreadyJoined">
+              <span class="alert alert-info" *ngIf="match.hasTimeConstraint && !match.hasAlreadyJoined && match.availablePlaces !== match.playersCount">
                   You have another match scheduled at {{match.date | date}}.
               </span>
               <span class="alert alert-info" *ngIf="match.hasAlreadyJoined && !match.hasTimeConstraint">
                   You have joined this match.
               </span>
-
+              <span class="alert alert-danger" *ngIf="match.availablePlaces === 0 && !match.hasAlreadyJoined">
+                  This match is full.
+              </span>
               <hr>
           </div>
           <ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalPages" ellipses="true" [(page)]="page" (pageChange)="onPageChange()"></ngb-pagination>            

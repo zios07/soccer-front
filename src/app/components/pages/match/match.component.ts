@@ -49,6 +49,7 @@ export class MatchComponent implements OnInit {
     this.participationService.participate(match, this.player).subscribe(resp => {
       this.toastr.info("Joined match successfully");
       this.verifyConstraints(match);
+      this.loadMatches();
     }, error => {
       this.toastr.error("Error while joining the match");
     });
