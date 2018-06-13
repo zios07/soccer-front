@@ -20,7 +20,7 @@
               <input type="date" name="date" class="form-control" id="inputDate" [(ngModel)]="match.date" required>
             </div>
             <div class="row">
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <div class="form-group">
                   <label for="inputCity">City</label>
                   <input type="text" class="form-control" id="inputCity" placeholder="City" name="city" [(ngModel)]="match.address.city" required>
@@ -33,6 +33,12 @@
                   <div class="valid-feedback">
                     Looks good!
                   </div>
+                </div>
+              </div> -->
+              <div class="col-md-12">
+                <label>Address</label>
+                <div class="form-group">
+                  <input type="text" placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control address-input" #search>
                 </div>
               </div>
               <div class="col-md-6">
