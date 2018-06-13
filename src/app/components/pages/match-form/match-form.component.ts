@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Match } from '../../../models/match';
 import { Pitch } from '../../../models/pitch';
-import { CityService } from '../../../services/city.service';
 import { Address } from '../../../models/address';
 import { PitchService } from '../../../services/pitch.service';
 import { MatchService } from '../../../services/match.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Team } from '../../../models/team';
-import { PlayerService } from '../../../services/player.service';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { ParticipationService } from '../../../services/participation.service';
 
 @Component({
   selector: 'app-match-form',
@@ -24,10 +23,10 @@ export class MatchFormComponent implements OnInit {
   playersCountOptions = [{'value': 10}, {'value': 14}, {'value': 22}];
   reservedPlaces: number = 0;
   
-  constructor(private cityService: CityService,
-              private pitchService: PitchService,
+  constructor(private pitchService: PitchService,
               private matchService: MatchService,
-              private playerService: PlayerService,
+              private participationService: ParticipationService,
+              private authService: AuthenticationService,
               private router: Router,
               private toastr: ToastrService) { 
     this.match.address = new Address();
@@ -46,10 +45,16 @@ export class MatchFormComponent implements OnInit {
 
   create() {
     this.match.availablePlaces = this.match.playersCount - this.reservedPlaces;
+    if(this.match.availablePlaces > this.match.playersCount)
+      this.match.availablePlaces = 0;
     this.matchService.create(this.match).toPromise().then(resp => {
       this.toastr.info("Match added successfully");
-      let match = resp.body;
+      let player = this.authService.getAuthenticatedPlayer();
+      this.participationService.participate(resp.body, player).subscribe(resp2 => {
         this.router.navigate(['/match']);
+      }, error => {
+        this.toastr.error("Error while joining the match");
+      })
     }, error => {
       this.toastr.error(String(error));
     })

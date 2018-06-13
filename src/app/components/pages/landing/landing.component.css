@@ -29,6 +29,10 @@ a:hover {
   color: #f05f40;
 }
 
+.row {
+  margin: 0;
+}
+
 h1,
 h2,
 h3,
@@ -80,16 +84,31 @@ img::-moz-selection {
   background: transparent;
 }
 
+header {
+  position: absolute;
+  top: 0;
+}
 
-header.masthead {
-  padding-top: 10rem;
-  padding-bottom: calc(10rem - 56px);
-  background-image: url("../../../../assets/images/header.jpg");
-  background-position: center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+.background-image {
+  background-image: url("../../../../assets/images/header2.jpg");
   background-size: cover;
+  /* display: block; */
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  height: 800px;
+  left: 0;
+  /* position: fixed; */
+  right: 0;
+  z-index: 1;
+}
+
+.content {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  top: 10px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  z-index: 2;
 }
 
 header.masthead hr {
@@ -197,24 +216,24 @@ header.masthead p {
 }
 
 .text-primary {
-  color: #F05F40 !important;
+  color: black !important;
 }
 
 .btn-radius {
   font-weight: 700;
   text-transform: uppercase;
   border: none;
-  border-radius: 300px;
+  border-radius: 10px;
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .btn-xl {
-  padding: 1rem 2rem;
+  padding: 1rem 2rem; 
 }
 
 .btn-primary {
-  background-color: #F05F40;
-  border-color: #F05F40;
+  background-color: black;
+  border-color: black;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {

@@ -45,11 +45,11 @@
   
   @media (min-width: 992px) {
     #mainNav {
-      border-color: transparent;
+      border-color: white;
       background-color: transparent;
     }
     #mainNav .navbar-brand {
-      color: rgba(255, 255, 255, 0.7);
+      color: white;
     }
     #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
       color: #fff;
@@ -59,7 +59,7 @@
     }
     #mainNav .navbar-nav > li.nav-item > a.nav-link,
     #mainNav .navbar-nav > li.nav-item > a.nav-link:focus {
-      color: rgba(255, 255, 255, 0.7);
+      color: white;
     }
     #mainNav .navbar-nav > li.nav-item > a.nav-link:hover,
     #mainNav .navbar-nav > li.nav-item > a.nav-link:focus:hover {
