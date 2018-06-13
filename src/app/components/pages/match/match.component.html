@@ -38,7 +38,7 @@
               <h5 class="card-title">{{match.label}} -
                 <span class="badges-container">
                     <span class="badge badge-secondary"><i class="fa fa-user"></i> Size: {{match.playersCount}} Players</span> |
-                    <span class="badge badge-danger"><i class="fa fa-user"></i> Available: {{match.availablePlaces}} Players</span>
+                    <span [class]="match.availablePlaces > 0 ? 'badge badge-primary' : 'badge badge-danger'"><i class="fa fa-user"></i> Available: {{match.availablePlaces}} Players</span>
                   </span>
               </h5>
               <div class="card-text">
