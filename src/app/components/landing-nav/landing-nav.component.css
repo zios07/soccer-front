@@ -46,7 +46,7 @@
   @media (min-width: 992px) {
     #mainNav {
       border-color: white;
-      background-color: transparent;
+      background-color: black;
     }
     #mainNav .navbar-brand {
       color: white;
