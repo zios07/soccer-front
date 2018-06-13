@@ -3,7 +3,6 @@ import { environment } from '../../environments/environment';
 import { EntityService } from './entity.service';
 import { Match } from '../models/match';
 import { Player } from '../models/player';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
