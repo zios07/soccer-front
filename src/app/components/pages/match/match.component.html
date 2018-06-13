@@ -1,6 +1,6 @@
 <app-nav></app-nav>
-<div class="container">
   
+<div class="container">
 
   <div class="row">
     <div class="col-sm-6">
@@ -51,17 +51,14 @@
                   {{match.address.city}} - {{match.address.zip}}
                 </div>
               </div><br>
-              <div class="join-btns-container" *ngIf="!match.hasTimeConstraint && !match.hasAlreadyJoined && match.availablePlaces !== 0">
-                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(match)">Join this match</button>&nbsp;
+              <div class="join-btns-container" *ngIf="!match.hasTimeConstraint && !match.hasAlreadyJoined">
+                <button class="btn btn-outline-primary btn-join" (click)="JoinMatch(match)" [disabled]="match.availablePlaces === 0 && !match.hasAlreadyJoined">Join this match</button>&nbsp;
               </div>
               <span class="alert alert-info" *ngIf="match.hasTimeConstraint && !match.hasAlreadyJoined && match.availablePlaces !== match.playersCount">
                   You have another match scheduled at {{match.date | date}}.
               </span>
               <span class="alert alert-info" *ngIf="match.hasAlreadyJoined && !match.hasTimeConstraint">
                   You have joined this match.
-              </span>
-              <span class="alert alert-danger" *ngIf="match.availablePlaces === 0 && !match.hasAlreadyJoined">
-                  This match is full.
               </span>
               <hr>
           </div>

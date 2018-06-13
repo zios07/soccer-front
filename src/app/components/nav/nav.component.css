@@ -45,8 +45,8 @@
   
   @media (min-width: 992px) {
     #mainNav {
-      border-color: transparent;
-      background-color: transparent;
+      border-color: #F05F40;
+      background-color: white;
     }
     #mainNav .navbar-brand {
       /* color: rgba(73, 24, 24, 0.7); */
@@ -67,7 +67,7 @@
     }
     #mainNav.navbar-shrink {
       border-bottom: 1px solid rgba(33, 37, 41, 0.1);
-      background-color: rgb(126, 19, 19);
+      background-color: white;
     }
     #mainNav.navbar-shrink .navbar-brand {
       color: #F05F40;
