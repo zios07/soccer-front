@@ -92,12 +92,10 @@ header {
 .background-image {
   background-image: url("../../../../assets/images/header2.jpg");
   background-size: cover;
-  /* display: block; */
   filter: blur(5px);
   -webkit-filter: blur(5px);
   height: 800px;
   left: 0;
-  /* position: fixed; */
   right: 0;
   z-index: 1;
 }
@@ -216,7 +214,7 @@ header.masthead p {
 }
 
 .text-primary {
-  color: black !important;
+  color: #212529 !important;
 }
 
 .btn-radius {
@@ -232,8 +230,8 @@ header.masthead p {
 }
 
 .btn-primary {
-  background-color: black;
-  border-color: black;
+  background-color: #212529;
+  border-color: #212529;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
@@ -265,4 +263,8 @@ header.masthead p {
 
 .modal-footer {
   border-top: 1px solid #ffe6e0;
+}
+
+.contact {
+  opacity: 0.5;
 }
