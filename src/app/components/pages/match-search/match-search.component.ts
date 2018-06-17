@@ -1,9 +1,9 @@
 import { MapsAPILoader } from '@agm/core';
-import {} from '@types/googlemaps';
 import { ViewChild, ElementRef, NgZone, Component, OnInit } from '@angular/core';
 import { LocationService } from '../../../services/location.service';
 import { Match } from '../../../models/match';
 import { Location } from '../../../models/location';
+import {} from '@types/googlemaps';
 
 @Component({
   selector: 'app-match-search',

@@ -265,6 +265,10 @@ header.masthead p {
   border-top: 1px solid #ffe6e0;
 }
 
+.masthead {
+  margin-left: 10%;
+}
+
 .contact {
   opacity: 0.5;
 }

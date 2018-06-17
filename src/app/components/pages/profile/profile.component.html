@@ -118,7 +118,7 @@
                             <h5 class="card-header">{{match.label}}</h5>
                             <div class="card-body">
                                 <h5 class="card-title">{{match.date | date}}</h5>
-                                <p class="card-text">{{match.address.city}} - {{match.address.zip}}</p>
+                                <p class="card-text">{{match.address.value}}</p>
                                 <button class="btn btn-outline-primary" (click)="quitMatch(match)">Quit</button>
                             </div>
                         </div>
