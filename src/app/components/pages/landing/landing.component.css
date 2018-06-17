@@ -266,3 +266,7 @@ header.masthead p {
 .modal-footer {
   border-top: 1px solid #ffe6e0;
 }
+
+.masthead {
+  margin-left: 10%;
+}

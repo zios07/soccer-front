@@ -11,6 +11,7 @@ import { ParticipationService } from '../../../services/participation.service';
 import { MapsAPILoader } from '@agm/core';
 import { LocationService } from '../../../services/location.service';
 import { Location } from '../../../models/location';
+import {} from '@types/googlemaps';
 
 @Component({
   selector: 'app-match-form',
